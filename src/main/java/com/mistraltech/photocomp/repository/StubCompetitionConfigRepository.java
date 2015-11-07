@@ -11,8 +11,17 @@ import java.util.Optional;
 @Qualifier("competitionConfigRepository")
 public class StubCompetitionConfigRepository implements CompetitionConfigRepository {
 
-    private CompetitionConfig config = new CompetitionConfig("My Competition",
-            new PersonName(Optional.empty(), "admin", Optional.empty()));
+    private static final String COMPETITION_NAME = "My Competition";
+    private static final Optional<String> TITLE = Optional.empty();
+    private static final String FORENAME = "admin";
+    private static final Optional<String> SURNAME = Optional.empty();
+
+    private CompetitionConfig config;
+
+    public StubCompetitionConfigRepository() {
+        this.config = new CompetitionConfig(COMPETITION_NAME,
+                new PersonName(TITLE, FORENAME, SURNAME));
+    }
 
     @Override
     public CompetitionConfig getConfig() {

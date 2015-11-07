@@ -10,11 +10,10 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 public class CompetitionConfigTest {
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
-
     private final PersonName administratorName =
             new PersonName(Optional.of("title"), "forename", Optional.of("surname"));
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
 
     @Test
     public void canConstruct() {

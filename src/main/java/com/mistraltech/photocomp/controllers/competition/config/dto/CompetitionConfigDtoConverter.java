@@ -11,12 +11,14 @@ import java.util.Optional;
 @Qualifier("competitionConfigDtoConverter")
 public class CompetitionConfigDtoConverter {
     public CompetitionConfigDto toDto(CompetitionConfig competitionConfig) {
-        final CompetitionConfigDto competitionConfigDto = new CompetitionConfigDto();
-        competitionConfigDto.setCompetitionName(competitionConfig.getCompetitionName());
-        competitionConfigDto.setAdminTitle(competitionConfig.getAdministratorName().getTitle().orElse(null));
-        competitionConfigDto.setAdminForename(competitionConfig.getAdministratorName().getForename());
-        competitionConfigDto.setAdminSurname(competitionConfig.getAdministratorName().getSurname().orElse(null));
-        return competitionConfigDto;
+        final CompetitionConfigDto dto = new CompetitionConfigDto();
+
+        dto.setCompetitionName(competitionConfig.getCompetitionName());
+        dto.setAdminTitle(competitionConfig.getAdministratorName().getTitle().orElse(null));
+        dto.setAdminForename(competitionConfig.getAdministratorName().getForename());
+        dto.setAdminSurname(competitionConfig.getAdministratorName().getSurname().orElse(null));
+
+        return dto;
     }
 
     public CompetitionConfig toModel(CompetitionConfigDto competitionConfigDto) {

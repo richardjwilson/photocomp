@@ -6,7 +6,7 @@ import org.springframework.data.repository.Repository;
 import java.util.UUID;
 
 public interface CompetitionConfigRepository extends Repository<CompetitionConfig, UUID> {
-  CompetitionConfig getConfig();
+    CompetitionConfig getConfig();
 
-  CompetitionConfig save(CompetitionConfig competitionConfig);
+    CompetitionConfig save(CompetitionConfig competitionConfig);
 }
