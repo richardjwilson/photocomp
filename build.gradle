@@ -1,22 +1,6 @@
-
-buildscript {
-    repositories {
-        maven {
-            url "https://plugins.gradle.org/m2/"
-        }
-    }
-    dependencies {
-        classpath "net.saliman:gradle-cobertura-plugin:2.2.8"
-    }
-}
-
-
 apply plugin: 'war'
 apply plugin: 'checkstyle'
-apply plugin: 'net.saliman.cobertura'
-apply plugin: 'findbugs'
-apply plugin: 'jdepend'
-apply plugin: 'pmd'
+apply plugin: 'jacoco'
 
 repositories {
     mavenCentral()
@@ -33,21 +17,15 @@ checkstyle {
     toolVersion = '6.11.2'
 }
 
-cobertura {
-    coverageCheckLineRate = 100
-    coverageCheckHaltOnFailure = false
+jacoco {
+    toolVersion = "0.7.5.201505241946"
 }
 
-findbugs {
-    ignoreFailures = false
-}
-
-jdepend {
-    ignoreFailures = false
-}
-
-pmd {
-    ignoreFailures = false
+jacocoTestReport {
+    reports {
+        xml.enabled false
+        csv.enabled false
+    }
 }
 
 configurations {
@@ -94,3 +72,4 @@ dependencies {
     }
 }
 
+build.dependsOn jacocoTestReport
