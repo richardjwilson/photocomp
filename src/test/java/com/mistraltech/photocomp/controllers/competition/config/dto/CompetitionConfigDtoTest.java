@@ -1,5 +1,6 @@
 package com.mistraltech.photocomp.controllers.competition.config.dto;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import static com.mistraltech.photocomp.controllers.competition.config.dto.CompetitionConfigDtoMatcher.aCompetitionConfigDtoLike;
@@ -8,11 +9,19 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class TestCompetitionConfigDto {
+public class CompetitionConfigDtoTest {
+
+    private CompetitionConfigDto competitionConfigDto;
+    private CompetitionConfigDto defaultCompetitionConfigDto;
+
+    @Before
+    public void setUp() {
+        competitionConfigDto = new CompetitionConfigDto();
+        defaultCompetitionConfigDto = new CompetitionConfigDto();
+    }
+
     @Test
     public void canConstruct() {
-        final CompetitionConfigDto competitionConfigDto = new CompetitionConfigDto();
-
         assertThat(competitionConfigDto, is(aCompetitionConfigDtoThat()
                 .hasAdminTitle(nullValue())
                 .hasAdminForename(nullValue())
@@ -21,9 +30,6 @@ public class TestCompetitionConfigDto {
 
     @Test
     public void canSetAdminTitle() {
-        final CompetitionConfigDto competitionConfigDto = new CompetitionConfigDto();
-        final CompetitionConfigDto defaultCompetitionConfigDto = new CompetitionConfigDto();
-
         competitionConfigDto.setAdminTitle("title");
 
         assertThat(competitionConfigDto, is(aCompetitionConfigDtoLike(defaultCompetitionConfigDto)
@@ -32,9 +38,6 @@ public class TestCompetitionConfigDto {
 
     @Test
     public void canSetAdminForename() {
-        final CompetitionConfigDto competitionConfigDto = new CompetitionConfigDto();
-        final CompetitionConfigDto defaultCompetitionConfigDto = new CompetitionConfigDto();
-
         competitionConfigDto.setAdminForename("forename");
 
         assertThat(competitionConfigDto, is(aCompetitionConfigDtoLike(defaultCompetitionConfigDto)
@@ -43,9 +46,6 @@ public class TestCompetitionConfigDto {
 
     @Test
     public void canSetAdminSurname() {
-        final CompetitionConfigDto competitionConfigDto = new CompetitionConfigDto();
-        final CompetitionConfigDto defaultCompetitionConfigDto = new CompetitionConfigDto();
-
         competitionConfigDto.setAdminSurname("surname");
 
         assertThat(competitionConfigDto, is(aCompetitionConfigDtoLike(defaultCompetitionConfigDto)

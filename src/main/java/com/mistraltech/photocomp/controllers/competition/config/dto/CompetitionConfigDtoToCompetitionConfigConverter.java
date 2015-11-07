@@ -1,15 +1,15 @@
 package com.mistraltech.photocomp.controllers.competition.config.dto;
 
+import com.mistraltech.photocomp.controllers.Converter;
 import com.mistraltech.photocomp.model.CompetitionConfig;
 import com.mistraltech.photocomp.model.PersonName;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
 @Component
-@Qualifier("competitionConfigDtoConverter")
-public class CompetitionConfigDtoConverter {
+public class CompetitionConfigDtoToCompetitionConfigConverter implements
+        Converter<CompetitionConfigDto, CompetitionConfig> {
     public CompetitionConfigDto toDto(CompetitionConfig competitionConfig) {
         final CompetitionConfigDto dto = new CompetitionConfigDto();
 
@@ -21,14 +21,15 @@ public class CompetitionConfigDtoConverter {
         return dto;
     }
 
-    public CompetitionConfig toModel(CompetitionConfigDto competitionConfigDto) {
+    @Override
+    public CompetitionConfig convert(CompetitionConfigDto source) {
         PersonName adminName = new PersonName(
-                Optional.ofNullable(competitionConfigDto.getAdminTitle()),
-                competitionConfigDto.getAdminForename(),
-                Optional.ofNullable(competitionConfigDto.getAdminSurname()));
+                Optional.ofNullable(source.getAdminTitle()),
+                source.getAdminForename(),
+                Optional.ofNullable(source.getAdminSurname()));
 
         CompetitionConfig updatedCompetitionConfig = new CompetitionConfig(
-                competitionConfigDto.getCompetitionName(),
+                source.getCompetitionName(),
                 adminName);
 
         return updatedCompetitionConfig;

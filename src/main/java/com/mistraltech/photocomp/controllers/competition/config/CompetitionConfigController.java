@@ -1,7 +1,7 @@
 package com.mistraltech.photocomp.controllers.competition.config;
 
+import com.mistraltech.photocomp.controllers.Converter;
 import com.mistraltech.photocomp.controllers.competition.config.dto.CompetitionConfigDto;
-import com.mistraltech.photocomp.controllers.competition.config.dto.CompetitionConfigDtoConverter;
 import com.mistraltech.photocomp.model.CompetitionConfig;
 import com.mistraltech.photocomp.repository.CompetitionConfigRepository;
 import org.slf4j.Logger;
@@ -19,13 +19,16 @@ public class CompetitionConfigController {
     private Logger logger = LoggerFactory.getLogger(CompetitionConfigController.class);
 
     private CompetitionConfigRepository competitionConfigRepository;
-    private CompetitionConfigDtoConverter competitionConfigDtoConverter;
+    private Converter<CompetitionConfig, CompetitionConfigDto> modelToDtoConverter;
+    private Converter<CompetitionConfigDto, CompetitionConfig> dtoToModelConverter;
 
     @Autowired
     public CompetitionConfigController(CompetitionConfigRepository competitionConfigRepository,
-            CompetitionConfigDtoConverter competitionConfigDtoConverter) {
+            Converter<CompetitionConfig, CompetitionConfigDto> modelToDtoConverter,
+            Converter<CompetitionConfigDto, CompetitionConfig> dtoToModelConverter) {
         this.competitionConfigRepository = competitionConfigRepository;
-        this.competitionConfigDtoConverter = competitionConfigDtoConverter;
+        this.modelToDtoConverter = modelToDtoConverter;
+        this.dtoToModelConverter = dtoToModelConverter;
     }
 
     @RequestMapping(method = RequestMethod.GET, produces = "application/json")
@@ -35,7 +38,7 @@ public class CompetitionConfigController {
 
         CompetitionConfig storedCompetitionConfig = competitionConfigRepository.getConfig();
 
-        return competitionConfigDtoConverter.toDto(storedCompetitionConfig);
+        return modelToDtoConverter.convert(storedCompetitionConfig);
     }
 
     @RequestMapping(method = RequestMethod.PUT, produces = "application/json")
@@ -43,9 +46,13 @@ public class CompetitionConfigController {
     public CompetitionConfigDto updateConfig(@RequestBody CompetitionConfigDto competitionConfigDto) {
         logger.info("Processing put request for comp-config");
 
-        CompetitionConfig updatedCompetitionConfig = competitionConfigDtoConverter.toModel(competitionConfigDto);
+        // TODO implement validator for CompetitionConfigDto
+        // TODO Return validation results in error response
+
+        CompetitionConfig updatedCompetitionConfig = dtoToModelConverter.convert(
+                competitionConfigDto);
         CompetitionConfig storedCompetitionConfig = competitionConfigRepository.save(updatedCompetitionConfig);
 
-        return competitionConfigDtoConverter.toDto(storedCompetitionConfig);
+        return modelToDtoConverter.convert(storedCompetitionConfig);
     }
 }
