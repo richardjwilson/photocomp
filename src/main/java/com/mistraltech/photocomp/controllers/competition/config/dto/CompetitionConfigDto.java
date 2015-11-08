@@ -40,4 +40,14 @@ public class CompetitionConfigDto {
     public void setAdminSurname(String adminSurname) {
         this.adminSurname = adminSurname;
     }
+
+    @Override
+    public String toString() {
+        return "CompetitionConfigDto{" +
+                "competitionName='" + competitionName + '\'' +
+                ", adminTitle='" + adminTitle + '\'' +
+                ", adminForename='" + adminForename + '\'' +
+                ", adminSurname='" + adminSurname + '\'' +
+                '}';
+    }
 }

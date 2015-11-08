@@ -19,4 +19,12 @@ public class CompetitionConfig {
     public PersonName getAdministratorName() {
         return administratorName;
     }
+
+    @Override
+    public String toString() {
+        return "CompetitionConfig{" +
+                "competitionName='" + competitionName + '\'' +
+                ", administratorName=" + administratorName +
+                '}';
+    }
 }

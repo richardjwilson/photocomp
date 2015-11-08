@@ -27,4 +27,13 @@ public class PersonName {
     public Optional<String> getSurname() {
         return surname;
     }
+
+    @Override
+    public String toString() {
+        return "PersonName{" +
+                "title=" + title +
+                ", forename='" + forename + '\'' +
+                ", surname=" + surname +
+                '}';
+    }
 }

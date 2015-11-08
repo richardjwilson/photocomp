@@ -5,8 +5,10 @@ import org.junit.Test;
 
 import static com.mistraltech.photocomp.controllers.competition.config.dto.CompetitionConfigDtoMatcher.aCompetitionConfigDtoLike;
 import static com.mistraltech.photocomp.controllers.competition.config.dto.CompetitionConfigDtoMatcher.aCompetitionConfigDtoThat;
+import static org.hamcrest.CoreMatchers.endsWith;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
+import static org.hamcrest.CoreMatchers.startsWith;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class CompetitionConfigDtoTest {
@@ -50,5 +52,11 @@ public class CompetitionConfigDtoTest {
 
         assertThat(competitionConfigDto, is(aCompetitionConfigDtoLike(defaultCompetitionConfigDto)
                 .hasAdminSurname("surname")));
+    }
+
+    @Test
+    public void overridesToString() {
+        assertThat(competitionConfigDto.toString(), startsWith("CompetitionConfigDto{"));
+        assertThat(competitionConfigDto.toString(), endsWith("}"));
     }
 }

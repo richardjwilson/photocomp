@@ -6,7 +6,9 @@ import org.junit.rules.ExpectedException;
 
 import java.util.Optional;
 
+import static org.hamcrest.CoreMatchers.endsWith;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.startsWith;
 import static org.junit.Assert.assertThat;
 
 public class CompetitionConfigTest {
@@ -38,5 +40,12 @@ public class CompetitionConfigTest {
         thrown.expectMessage("AdministratorName must not be null");
 
         new CompetitionConfig("comp", null);
+    }
+
+    @Test
+    public void overridesToString() {
+        final CompetitionConfig competitionConfig = new CompetitionConfig("comp", administratorName);
+        assertThat(competitionConfig.toString(), startsWith("CompetitionConfig{"));
+        assertThat(competitionConfig.toString(), endsWith("}"));
     }
 }

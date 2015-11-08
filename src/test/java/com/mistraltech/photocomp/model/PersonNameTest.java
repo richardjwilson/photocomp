@@ -7,7 +7,9 @@ import org.junit.rules.ExpectedException;
 import java.util.Optional;
 
 import static com.mistraltech.photocomp.model.PersonNameMatcher.aPersonNameThat;
+import static org.hamcrest.CoreMatchers.endsWith;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.startsWith;
 import static org.junit.Assert.assertThat;
 
 public class PersonNameTest {
@@ -58,4 +60,12 @@ public class PersonNameTest {
         new PersonName(Optional.of("title"), "forename", null);
     }
 
+
+    @Test
+    public void overridesToString() {
+        final PersonName personName = new PersonName(Optional.empty(), "forename", Optional.empty());
+
+        assertThat(personName.toString(), startsWith("PersonName{"));
+        assertThat(personName.toString(), endsWith("}"));
+    }
 }
