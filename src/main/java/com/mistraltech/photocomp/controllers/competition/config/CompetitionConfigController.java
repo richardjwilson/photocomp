@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -31,8 +30,7 @@ public class CompetitionConfigController {
         this.dtoToModelConverter = dtoToModelConverter;
     }
 
-    @RequestMapping(method = RequestMethod.GET, produces = "application/json")
-    @ResponseBody
+    @RequestMapping(method = RequestMethod.GET)
     public CompetitionConfigDto getConfig() {
         logger.info("Processing get request for comp-config");
 
@@ -41,16 +39,14 @@ public class CompetitionConfigController {
         return modelToDtoConverter.convert(storedCompetitionConfig);
     }
 
-    @RequestMapping(method = RequestMethod.PUT, produces = "application/json")
-    @ResponseBody
+    @RequestMapping(method = RequestMethod.PUT)
     public CompetitionConfigDto updateConfig(@RequestBody CompetitionConfigDto competitionConfigDto) {
         logger.info("Processing put request for comp-config");
 
         // TODO implement validator for CompetitionConfigDto
         // TODO Return validation results in error response
 
-        CompetitionConfig updatedCompetitionConfig = dtoToModelConverter.convert(
-                competitionConfigDto);
+        CompetitionConfig updatedCompetitionConfig = dtoToModelConverter.convert(competitionConfigDto);
         CompetitionConfig storedCompetitionConfig = competitionConfigRepository.save(updatedCompetitionConfig);
 
         return modelToDtoConverter.convert(storedCompetitionConfig);

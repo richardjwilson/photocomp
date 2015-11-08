@@ -74,6 +74,9 @@ dependencies {
     // Mockito
     testCompile 'org.mockito:mockito-core:1.10.19'
 
+    // JSONAssert json matcher
+    testCompile 'org.skyscreamer:jsonassert:1.2.3'
+
     gradle.projectsEvaluated {
         tasks.withType(JavaCompile) {
             options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
