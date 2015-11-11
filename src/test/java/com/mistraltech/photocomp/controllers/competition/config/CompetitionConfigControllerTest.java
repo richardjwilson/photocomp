@@ -4,6 +4,7 @@ import com.mistraltech.photocomp.controllers.Converter;
 import com.mistraltech.photocomp.controllers.competition.config.dto.CompetitionConfigDto;
 import com.mistraltech.photocomp.model.CompetitionConfig;
 import com.mistraltech.photocomp.repository.CompetitionConfigRepository;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -110,5 +111,10 @@ public class CompetitionConfigControllerTest {
                         "\"adminForename\":\"Forename\"," +
                         "\"adminSurname\":\"Surname\"" +
                         "}"));
+    }
+
+    @Test
+    public void updateConfigValidatesConfig() {
+        Assert.fail("Add test for null or empty competitionName and null or empty adminForename");
     }
 }

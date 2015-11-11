@@ -7,6 +7,8 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
+import static java.util.Objects.requireNonNull;
+
 @Repository
 @Qualifier("competitionConfigRepository")
 public class StubCompetitionConfigRepository implements CompetitionConfigRepository {
@@ -30,7 +32,7 @@ public class StubCompetitionConfigRepository implements CompetitionConfigReposit
 
     @Override
     public CompetitionConfig save(CompetitionConfig competitionConfig) {
-        this.config = competitionConfig;
+        this.config = requireNonNull(competitionConfig, "Configuration must not be null");
         return competitionConfig;
     }
 }

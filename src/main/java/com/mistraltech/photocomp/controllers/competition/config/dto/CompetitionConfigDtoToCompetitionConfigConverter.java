@@ -8,18 +8,8 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 @Component
-public class CompetitionConfigDtoToCompetitionConfigConverter implements
-        Converter<CompetitionConfigDto, CompetitionConfig> {
-    public CompetitionConfigDto toDto(CompetitionConfig competitionConfig) {
-        final CompetitionConfigDto dto = new CompetitionConfigDto();
-
-        dto.setCompetitionName(competitionConfig.getCompetitionName());
-        dto.setAdminTitle(competitionConfig.getAdministratorName().getTitle().orElse(null));
-        dto.setAdminForename(competitionConfig.getAdministratorName().getForename());
-        dto.setAdminSurname(competitionConfig.getAdministratorName().getSurname().orElse(null));
-
-        return dto;
-    }
+public class CompetitionConfigDtoToCompetitionConfigConverter
+        implements Converter<CompetitionConfigDto, CompetitionConfig> {
 
     @Override
     public CompetitionConfig convert(CompetitionConfigDto source) {

@@ -51,6 +51,11 @@ dependencies {
     // Servlet API
     providedCompile 'javax.servlet:javax.servlet-api:3.1.0'
 
+    // Hibernate Bean Validation and Unified Expression Language
+    compile 'org.hibernate:hibernate-validator:5.2.2.Final'
+    compile 'javax.el:javax.el-api:2.2.4'
+    compile 'org.glassfish.web:javax.el:2.2.4'
+
     // Logging
     compile 'org.slf4j:jcl-over-slf4j:1.7.12'
     compile 'ch.qos.logback:logback-classic:1.1.3'

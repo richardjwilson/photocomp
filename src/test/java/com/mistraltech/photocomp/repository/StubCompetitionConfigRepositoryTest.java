@@ -4,7 +4,9 @@ import com.mistraltech.photocomp.model.CompetitionConfig;
 import com.mistraltech.photocomp.model.PersonName;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import java.util.Optional;
 
@@ -15,6 +17,9 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class StubCompetitionConfigRepositoryTest {
+
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
 
     @Before
     public void before() throws Exception {
@@ -71,5 +76,15 @@ public class StubCompetitionConfigRepositoryTest {
         final CompetitionConfig config = competitionConfigRepository.save(updatedCompetitionConfig);
 
         assertThat(config, is(aCompetitionConfigLike(competitionConfigRepository.getConfig())));
+    }
+
+    @Test
+    public void cannotSaveNullConfiguration() throws Exception {
+        final StubCompetitionConfigRepository competitionConfigRepository = new StubCompetitionConfigRepository();
+
+        thrown.expect(NullPointerException.class);
+        thrown.expectMessage("Configuration must not be null");
+
+        competitionConfigRepository.save(null);
     }
 }

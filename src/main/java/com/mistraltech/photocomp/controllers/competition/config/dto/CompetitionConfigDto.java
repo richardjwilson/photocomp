@@ -1,9 +1,18 @@
 package com.mistraltech.photocomp.controllers.competition.config.dto;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class CompetitionConfigDto {
+
+    @NotNull @Size(min = 1)
     private String competitionName;
+
     private String adminTitle;
+
+    @NotNull @Size(min = 1)
     private String adminForename;
+
     private String adminSurname;
 
     public CompetitionConfigDto() {

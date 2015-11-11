@@ -7,10 +7,14 @@ import com.mistraltech.photocomp.repository.CompetitionConfigRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping(path = "/api/comp/config")
@@ -40,15 +44,14 @@ public class CompetitionConfigController {
     }
 
     @RequestMapping(method = RequestMethod.PUT)
-    public CompetitionConfigDto updateConfig(@RequestBody CompetitionConfigDto competitionConfigDto) {
+    public ResponseEntity<CompetitionConfigDto> updateConfig(
+            @Valid @RequestBody CompetitionConfigDto competitionConfigDto) {
         logger.info("Processing put request for comp-config");
-
-        // TODO implement validator for CompetitionConfigDto
-        // TODO Return validation results in error response
 
         CompetitionConfig updatedCompetitionConfig = dtoToModelConverter.convert(competitionConfigDto);
         CompetitionConfig storedCompetitionConfig = competitionConfigRepository.save(updatedCompetitionConfig);
+        CompetitionConfigDto responseCompetitionConfigDto = modelToDtoConverter.convert(storedCompetitionConfig);
 
-        return modelToDtoConverter.convert(storedCompetitionConfig);
+        return new ResponseEntity<>(responseCompetitionConfigDto, HttpStatus.OK);
     }
 }
